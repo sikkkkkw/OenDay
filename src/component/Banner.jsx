@@ -2,7 +2,6 @@ import React from "react";
 import bell from "../img/bannerBell.png";
 import useUser from "./useUser";
 
-
 export default function Banner() {
   const userData = useUser();
   const userName = userData;
