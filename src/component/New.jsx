@@ -72,4 +72,5 @@ export default function Popular({ dark }) {
       {showModal && <Modal dark={dark} modalRef={modalRef} imageUrl={selectedImage} onClose={closeModal} content={modalCont} />}
     </>
   );
+  
 }
