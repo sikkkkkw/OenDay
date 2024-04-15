@@ -20,7 +20,6 @@ export default function Modal({ modalRef, onClose, content, dark }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const userData = useUser();
   const userName = userData;
-  const Swal = require('sweetalert2')
 
   const handleReservation = () => {
     if (!userName) {
