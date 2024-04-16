@@ -35,7 +35,7 @@ export default function NotFound404() {
                     <p className="text-[10px] w-[20px]">출처: https://github.com/haesoo-y/React_Basic_Project</p>
                   </div>
                   <div className="flex flex-col items-center">
-                    <a href="" target="_blank"><HiMiniPuzzlePiece size={80} color="blue" /></a>
+                    <a href="../test.html" target="_blank"><HiMiniPuzzlePiece size={80} color="blue" /></a>
                     <p>출처: </p>
                   </div>
                 </div>

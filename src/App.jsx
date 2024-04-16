@@ -11,6 +11,7 @@ function App() {
   // 다크모드
   const { isDark, toggleDark } = useTheme();
   
+  //새로고침하면 화면 최상단으로 올라감 
   useEffect(() => { 
     window.onbeforeunload = function pushRefresh() {
       window.scrollTo(0, 0);
