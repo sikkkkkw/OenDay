@@ -5,12 +5,15 @@ import { IoGameController } from "react-icons/io5";
 import { HiMiniPuzzlePiece } from "react-icons/hi2";
 import { PiEggCrack } from "react-icons/pi";
 import notf from "../img/NotFound.png";
+import { GiRawEgg } from "react-icons/gi";
 
 export default function NotFound404() {
   const [showContent, setShowContent] = useState(false);
+  const [eggType, setEggType] = useState("cracked");
 
   const toggleContent = () => {
     setShowContent(!showContent);
+    setEggType(eggType === "cracked" ? "raw" : "cracked");
   };
 
   return (
@@ -26,7 +29,11 @@ export default function NotFound404() {
             홈페이지 바로가기
           </Link>
           <div className="mt-10 flex flex-col items-center gap-y-1 mb-10">
-            <PiEggCrack size={90} onClick={toggleContent} />
+            {eggType === "cracked" ? (
+              <PiEggCrack size={90} onClick={toggleContent} className="PiEggCrack" />
+            ) : (
+              <GiRawEgg size={90} onClick={toggleContent} className="RawEgg" />
+            )}
             {showContent && (
               <div>
                 <div className="flex gap-x-5">
