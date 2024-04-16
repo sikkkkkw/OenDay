@@ -3,7 +3,9 @@ import bell from "../img/bannerBell.png";
 import useUser from "./useUser";
 
 
-// 제발
+
+
+
 export default function Banner() {
   const userData = useUser();
   const userName = userData;
@@ -22,6 +24,7 @@ export default function Banner() {
           </div>
         </div>
       ) : (
+        
         <div className="w-full flex flex-col items-center justify-center py-10">
           <div className="w-full py-8 px-2 bg-mainBlue">
             <div className="w-full max-w-[800px] mx-auto flex text-white md:max-h-[85px]">

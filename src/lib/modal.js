@@ -137,7 +137,12 @@ export default function Modal({ modalRef, onClose, content, dark }) {
       const isDuplicate = existingData.some((item) => item.name === newData.name && item.dateYear === newData.dateYear && item.dateMonth === newData.dateMonth && item.dateDay === newData.dateDay);
   
       if (isDuplicate) {
-        alert("이미 수강 신청한 클래스입니다.");
+        Swal.fire({
+          position: "top",
+          // title: "The Internet?",
+          title: "이미 수강 신청한 클래스입니다.",
+          icon: "question"
+        });
         setIsSubmitting(false); // 수강 신청 완료 후 상태 변경
         return;
       }
