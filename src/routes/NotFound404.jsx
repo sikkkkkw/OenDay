@@ -25,23 +25,22 @@ export default function NotFound404() {
           <Link to="/" className="bg-mainBlue font-semibold py-3 px-6 text-white rounded-full text-xl">
             홈페이지 바로가기
           </Link>
-          <div className="mt-10 flex flex-col items-center gap-y-1">
-            <PiEggCrack size={80} onClick={toggleContent} />
+          <div className="mt-10 flex flex-col items-center gap-y-1 mb-10">
+            <PiEggCrack size={90} onClick={toggleContent} />
             {showContent && (
               <div>
                 <div className="flex gap-x-5">
                   <div className="flex flex-col items-center">
-                    <a href="https://harryproject03.netlify.app/" target="_blank"><IoGameController size={80} /></a>
-                    <p className="text-[10px] w-[20px]">출처: https://github.com/haesoo-y/React_Basic_Project</p>
+                    <a href="https://harryproject03.netlify.app/" target="_blank"><IoGameController size={50} /></a>
+                    <p className="text-[10px] w-[130px]">출처: https://github.com/haesoo-y/React_Basic_Project</p>
                   </div>
                   <div className="flex flex-col items-center">
-                    <a href="" target="_blank"><HiMiniPuzzlePiece size={80} color="blue" /></a>
-                    <p>출처: </p>
+                    <a href="" target="_blank"><HiMiniPuzzlePiece size={50} color="blue" /></a>
+                    <p className="text-[10px] w-[130px]">출처: </p>
                   </div>
                 </div>
               </div>
             )}
-        
           </div>
         </button>
       </div>
