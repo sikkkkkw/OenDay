@@ -32,7 +32,7 @@ export default function NotFound404() {
             {eggType === "cracked" ? (
               <PiEggCrack size={90} onClick={toggleContent} className="PiEggCrack" />
             ) : (
-              <GiRawEgg size={90} onClick={toggleContent} className="RawEgg" />
+              <GiRawEgg size={90} onClick={toggleContent} className="RawEgg" color="E7EC00"/>
             )}
             {showContent && (
               <div>
