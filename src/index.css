@@ -21,6 +21,18 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.PiEggCrack:hover {
+  animation: shake 0.5s ease infinite;
+}
+
 * {
   font-family: "Noto Sans KR", sans-serif;
   word-break: keep-all;
