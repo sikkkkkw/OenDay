@@ -41,7 +41,7 @@ export default function Modal({ modalRef, onClose, content, dark }) {
     const totalUserData = JSON.parse(sessionStorage.getItem("DataArray") || "[]");
     console.log(totalUserData);
 
-
+      // 서버로 넘길 데이터 
       const name = userName?.user?.username;
       const className = newData.name;
       const year = newData.dateYear;
