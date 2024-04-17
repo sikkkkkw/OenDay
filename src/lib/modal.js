@@ -11,7 +11,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Controller, useForm } from "react-hook-form";
 import useUser from "../component/useUser";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 export default function Modal({ modalRef, onClose, content, dark }) {
   const [value, setValue] = useState(dayjs());
@@ -25,16 +25,15 @@ export default function Modal({ modalRef, onClose, content, dark }) {
     if (!userName) {
       Swal.fire({
         icon: "error",
-        title: "회원가입 해주세요.",
-        footer: '<a href="../users/SignUp" style="color: blue;">로그인 및 회원가입 하러가기</a>'
+        title: "로그인 해주세요.",
+        footer: '<a href="../users/login" style="color: blue;">로그인 하러가기</a>',
       });
     }
   };
 
   // 알림톡 전송을 위한 버튼 이벤트 핸들러
-  const handtest = (newData) =>{
-
-    // BaseURL 지정 
+  const handtest = (newData) => {
+    // BaseURL 지정
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     // 세션에서 현재 신청한 클래스 이름을 가져옴
@@ -55,61 +54,57 @@ export default function Modal({ modalRef, onClose, content, dark }) {
 
     //데이터를 서버로 보내는 구성
     const data = {
-        name,
-        className,
-        year,
-        month,
-        day,
-        tel,
-        people,
-        LINK,
-        pfid,
-        templateId
+      name,
+      className,
+      year,
+      month,
+      day,
+      tel,
+      people,
+      LINK,
+      pfid,
+      templateId,
     };
 
-    console.log("sdsdsdsd:",data);
-
     fetch(`${BASE_URL}/users/solap`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     })
-    .then(response => response.json()) // 1번째 then은 API 요청이 완료되었을때 결고값을 JSON 으로 변환해줌 
-    .then(data => { //2번째 then은 API 요청이 완료되었을때 페이지를 이동시켜줌  
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "수강신청 완료되었습니다.",
-        showConfirmButton: false,
-        timer: 1500
-      });
-        
-    })
-    .catch((error) => {
-        console.error('Error:', error);
+      .then((response) => response.json()) // 1번째 then은 API 요청이 완료되었을때 결고값을 JSON 으로 변환해줌
+      .then((data) => {
+        //2번째 then은 API 요청이 완료되었을때 페이지를 이동시켜줌
+        Swal.fire({
+          icon: "success",
+          title: "수강 신청이 완료되었습니다.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
         //document.getElementById('result-message').innerHTML = 'Error: ' + error.message; // 에러 메시지 출력
-    });
-  }
+      });
+  };
 
   const onsubmit = async (data) => {
     if (!data.date || !data.number) {
-      // alert("날짜와 인원수를 모두 입력하세요.");
+      // alert("날짜와 인원수를 입력하세요.");
       Swal.fire({
-        position: "top",
         // title: "The Internet?",
-        title: "날짜와 인원수를 모두 입력하세요.",
-        icon: "question"
+        title: "날짜와 인원수를 입력하세요.",
+        icon: "question",
       });
       return;
     } else {
       if (isSubmitting) return; // 이미 수강 신청 중이면 함수 종료
-  
+
       setIsSubmitting(true); // 수강 신청 중으로 상태 변경
-  
+
       // console.log(data);
-  
+
       const newData = {
         address: content.address,
         time: content.time,
@@ -126,27 +121,26 @@ export default function Modal({ modalRef, onClose, content, dark }) {
         dateYear: data.date.slice(0, 4), // 'YYYY' 형식으로 분리
         dateMonth: data.date.slice(5, 7), // 'MM' 형식으로 분리
         dateDay: data.date.slice(8, 10), // 'DD' 형식으로 분리
-        date:data.date,
-        number: data.number
+        date: data.date,
+        number: data.number,
       };
-  
+
       // 세션 스토리지에서 기존 데이터 불러오기
       const existingData = JSON.parse(sessionStorage.getItem("DataArray") || "[]");
-  
+
       // 중복 체크
       const isDuplicate = existingData.some((item) => item.name === newData.name && item.dateYear === newData.dateYear && item.dateMonth === newData.dateMonth && item.dateDay === newData.dateDay);
-  
+
       if (isDuplicate) {
         Swal.fire({
-          position: "top",
           // title: "The Internet?",
           title: "이미 수강 신청한 클래스입니다.",
-          icon: "question"
+          icon: "question",
         });
         setIsSubmitting(false); // 수강 신청 완료 후 상태 변경
         return;
       }
-  
+
       // 중복되지 않으면 새로운 데이터 추가
       const updatedData = [...existingData, newData];
       sessionStorage.setItem("DataArray", JSON.stringify(updatedData));
@@ -154,7 +148,7 @@ export default function Modal({ modalRef, onClose, content, dark }) {
       handtest(newData);
     }
   };
-  
+
   const isUserLoggedIn = !!userName; // 사용자가 로그인했는지 확인
 
   return (

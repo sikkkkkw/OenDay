@@ -22,21 +22,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 
 @keyframes shake {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
-  75% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .PiEggCrack:hover {
   animation: shake 0.5s ease infinite;
-  color: #239aff;
+  color: var(--mainBlue);
 }
 
 * {
   font-family: "Noto Sans KR", sans-serif;
   word-break: keep-all;
+  --mainBlue: #239aff;
 }
 
 body {
@@ -99,7 +110,7 @@ select {
 }
 
 section .swiper-pagination-bullet {
-  background: #239aff;
+  background: var(--mainBlue);
 }
 
 .modal {
@@ -148,7 +159,7 @@ section .swiper-pagination-bullet {
   display: inline-block;
   width: 9px;
   height: 9px;
-  background: #239aff;
+  background: var(--mainBlue);
   border-radius: 50%;
 }
 
@@ -183,12 +194,24 @@ section .swiper-pagination-bullet {
   border-radius: 5px;
 }
 
+.swal2-container button:where(.swal2-styled).swal2-confirm {
+  background: var(--mainBlue);
+}
+
+.swal2-container button:where(.swal2-styled).swal2-confirm:focus {
+  box-shadow: 0 0 0 3px rgba(35, 154, 255, 0.5);
+}
+
+div:where(.swal2-container) div:where(.swal2-footer) a {
+  color: var(--mainBlue) !important;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #239aff;
+  background: var(--mainBlue);
   border-radius: 12px;
 }
 
