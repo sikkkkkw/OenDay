@@ -29,20 +29,20 @@ export default function NotFound404() {
             홈페이지 바로가기
           </Link>
           <div className="mt-10 flex flex-col items-center gap-y-1 mb-10">
-            {eggType === "cracked" ? (
-              <PiEggCrack size={90} onClick={toggleContent} className="PiEggCrack" />
-            ) : (
-              <GiRawEgg size={90} onClick={toggleContent} className="RawEgg" color="E7EC00"/>
-            )}
+            {eggType === "cracked" ? <PiEggCrack size={90} onClick={toggleContent} className="PiEggCrack" /> : <GiRawEgg size={90} onClick={toggleContent} className="RawEgg" color="E7EC00" />}
             {showContent && (
               <div>
                 <div className="flex gap-x-5">
                   <div className="flex flex-col items-center">
-                    <a href="https://harryproject03.netlify.app/" target="_blank"><IoGameController size={50} /></a>
+                    <a href="https://harryproject03.netlify.app/" target="_blank" rel="noreferrer">
+                      <IoGameController size={50} />
+                    </a>
                     <p className="text-[10px] w-[130px]">출처: https://github.com/haesoo-y/React_Basic_Project</p>
                   </div>
                   <div className="flex flex-col items-center">
-                    <a href="https://sikkkkkw.github.io/TestGame/" target="_blank"><HiMiniPuzzlePiece size={50} color="blue" /></a>
+                    <a href="https://sikkkkkw.github.io/TestGame/" target="_blank" rel="noreferrer">
+                      <HiMiniPuzzlePiece size={50} color="blue" />
+                    </a>
                     <p className="text-[10px] w-[130px]">출처: https://github.com/dissimulate/Clarity </p>
                   </div>
                 </div>
