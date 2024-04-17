@@ -38,7 +38,6 @@ export default function Modal({ modalRef, onClose, content, dark }) {
 
     // 세션에서 현재 신청한 클래스 이름을 가져옴
     const totalUserData = JSON.parse(sessionStorage.getItem("DataArray") || "[]");
-    console.log(totalUserData);
 
     const name = userName?.user?.username;
     const className = newData.name;
@@ -64,8 +63,6 @@ export default function Modal({ modalRef, onClose, content, dark }) {
       pfid,
       templateId,
     };
-
-    console.log("sdsdsdsd:", data);
 
     fetch(`${BASE_URL}/users/solap`, {
       method: "POST",
