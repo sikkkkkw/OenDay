@@ -38,17 +38,19 @@ export default function Modal({ modalRef, onClose, content, dark }) {
 
     // 세션에서 현재 신청한 클래스 이름을 가져옴
     const totalUserData = JSON.parse(sessionStorage.getItem("DataArray") || "[]");
+    console.log(totalUserData);
 
-    const name = userName?.user?.username;
-    const className = newData.name;
-    const year = newData.dateYear;
-    const month = newData.dateMonth;
-    const day = newData.dateDay;
-    const people = newData.number;
-    const tel = userName?.user?.phone;
-    const LINK = "https://one-day-git-master-jaesiks-projects.vercel.app/";
-    const pfid = process.env.PFID;
-    const templateId = process.env.TEMPLATEID;
+      // 서버로 넘길 데이터 
+      const name = userName?.user?.username;
+      const className = newData.name;
+      const year = newData.dateYear;
+      const month = newData.dateMonth;
+      const day = newData.dateDay;
+      const people = newData.number;
+      const tel = userName?.user?.phone;
+      const LINK = "https://one-day-git-master-jaesiks-projects.vercel.app/";
+      const pfid = process.env.PFID;
+      const templateId = process.env.TEMPLATEID;
 
     //데이터를 서버로 보내는 구성
     const data = {
