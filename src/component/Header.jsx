@@ -17,6 +17,11 @@ export default function Header({ dark, setDark }) {
   const [priceRange, setPriceRange] = useState("");
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [isSearched, setIsSearched] = useState(false);
+  
+  const uniqueTypes = [...new Set(classList.map(item => item.type))];
+  const uniquePeople = [...new Set(classList.map(item => item.people))];
+  const uniqueLine = [...new Set(classList.map(item => item.line))];
+  const uniquePrice = [...new Set(classList.map(item => item.price))];
 
   const handleReset = () => {
     setSearchQuery("");
@@ -40,11 +45,24 @@ export default function Header({ dark, setDark }) {
 
   const handleSearch = () => {
     const filtered = classList.filter((item) => {
-      return item.name.includes(searchQuery) && item.type.includes(searchQuery);
+      // 검색어로 필터링
+      const isNameMatch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
+      // 각 옵션이 데이터에 존재하고 해당 값과 일치하는 경우에만 해당 값을 필터링 조건으로 사용
+      const isTypeMatch = !classType || item.type === classType;
+      const isPeopleMatch = !participants || item.people === participants;
+      const isLineMatch = !onlineOffline || item.line === onlineOffline;
+      const isPriceMatch = !priceRange || item.price === priceRange;
+  
+      // 모든 조건이 참인 경우에만 필터링되도록 설정
+      return isNameMatch && isTypeMatch && isPeopleMatch && isLineMatch && isPriceMatch;
     });
     setFilteredClasses(filtered);
     setIsSearched(true);
   };
+  
+  
+  
+
   const titVariants = {
     start: { y: "100px" },
     end: { y: 0, transition: { type: "spring", damping: 12, stiffness: 100 } },
@@ -144,73 +162,42 @@ export default function Header({ dark, setDark }) {
               </div>
               <div className="w-full flex flex-wrap justify-center text-center gap-4 py-6">
                 <button className="w-fit">
-                  <select className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-[29px] cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={classType} onChange={(e) => setClassType(e.target.value)}>
-                    <option value="" disabled className="bg-white">
-                      분류
+                  <select onClick={(e)=>setClassType(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-[29px] cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={classType} onChange={(e) => setClassType(e.target.value)}>
+                  {uniqueTypes.map((type, index) => (
+                    <option key={index} value={type}  className="bg-white">
+                      {type}
                     </option>
-                    <option value="drawing" className="bg-white">
-                      드로잉
-                    </option>
-                    <option value="perfume" className="bg-white">
-                      음악
-                    </option>
-                    <option value="baking" className="bg-white">
-                      요리
-                    </option>
-                    <option value="sport" className="bg-white">
-                      스포츠
-                    </option>
-                    <option value="ceramic" className="bg-white">
-                      체험
-                    </option>
+                  ))}
                     {/* 나머지 옵션들 추가 */}
                   </select>
                 </button>
                 {/* 세부 검색박스 버튼들 */}
                 <button className="w-fit">
-                  <select className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-[29px] cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={participants} onChange={(e) => setParticipants(e.target.value)}>
-                    <option value="" disabled className="bg-white">
-                      참가 인원
+                  <select onClick={(e)=>setParticipants(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-[29px] cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={participants} onChange={(e) => setParticipants(e.target.value)}>
+                  {uniquePeople.map((peopleRange, index) => (
+                    <option key={index} value={peopleRange}  className="bg-white">
+                      {peopleRange}
                     </option>
-                    <option value="0-4" className="bg-white">
-                      0 ~ 4 명
-                    </option>
-                    <option value="5-9" className="bg-white">
-                      5 ~ 9명
-                    </option>
-                    <option value="10-15" className="bg-white">
-                      10 ~ 15명
-                    </option>
+                  ))}
                     {/* 나머지 옵션들 추가 */}
                   </select>
                 </button>
                 <button className="w-fit">
-                  <select className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-8 cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={onlineOffline} onChange={(e) => setOnlineOffline(e.target.value)}>
-                    <option value="" disabled className="bg-white">
-                      온/오프라인
+                  <select  onClick={(e)=>setOnlineOffline(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-8 cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={onlineOffline} onChange={(e) => setOnlineOffline(e.target.value)}>
+                  {uniqueLine.map((line, index) => (
+                    <option key={index} value={line} className="bg-white">
+                      {line}
                     </option>
-                    <option value="online" className="bg-white">
-                      온라인
-                    </option>
-                    <option value="offline" className="bg-white">
-                      오프라인
-                    </option>
+                  ))}
                   </select>
                 </button>
                 <button className="w-fit">
-                  <select className="border-2 border-gray-400 rounded-2xl outline-none p-2 cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={priceRange} onChange={(e) => setPriceRange(e.target.value)}>
-                    <option value="" disabled className="bg-white">
-                      가격
+                  <select  onClick={(e)=>setPriceRange(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={priceRange} onChange={(e) => setPriceRange(e.target.value)}>
+                  {uniquePrice.map((price, index) => (
+                    <option key={index} value={price} className="bg-white">
+                      {price}
                     </option>
-                    <option value="30000" className="bg-white">
-                      30,000원 ~
-                    </option>
-                    <option value="50000" className="bg-white">
-                      50,000원 ~
-                    </option>
-                    <option value="100000" className="bg-white">
-                      100,000원 ~
-                    </option>
+                  ))}
                     {/* 나머지 옵션들 추가 */}
                   </select>
                 </button>
