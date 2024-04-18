@@ -38,21 +38,9 @@ export default function Header({ dark, setDark }) {
     window.location.href = "/";
   };
 
-
-    useEffect(() => {
-      handleSearch();
-    }, [searchQuery, classType, participants, onlineOffline, priceRange]);
-
   const handleSearch = () => {
     const filtered = classList.filter((item) => {
-      const nameIncludesQuery = item.name.toLowerCase().includes(searchQuery.toLowerCase());
-      const typeIncludesQuery = item.type.toLowerCase().includes(searchQuery.toLowerCase());
-      return nameIncludesQuery || typeIncludesQuery;
-    }).filter((item) => {
-      return (!classType || item.type === classType) &&
-        (!participants || item.people.includes(participants)) &&
-        (!onlineOffline || item.line === onlineOffline) &&
-        (!priceRange || parseInt(item.price) >= parseInt(priceRange));
+      return item.name.includes(searchQuery) && item.type.includes(searchQuery);
     });
     setFilteredClasses(filtered);
     setIsSearched(true);
