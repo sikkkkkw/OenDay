@@ -38,6 +38,11 @@ export default function Header({ dark, setDark }) {
     window.location.href = "/";
   };
 
+
+    useEffect(() => {
+      handleSearch();
+    }, [searchQuery, classType, participants, onlineOffline, priceRange]);
+
   const handleSearch = () => {
     const filtered = classList.filter((item) => {
       const nameIncludesQuery = item.name.toLowerCase().includes(searchQuery.toLowerCase());
