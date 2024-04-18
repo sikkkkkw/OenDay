@@ -5,23 +5,21 @@ import useUser from "./useUser";
 import { apiPostLogout } from "../api";
 import logo from "../img/logo.svg";
 import SearchPage from "./SearchPage.jsx";
-import { classList } from "../lib/classList";
+import { classList, classListNew } from "../lib/classList";
 import angleDown from "../img/angleDown.svg";
 import { motion } from "framer-motion";
 
 export default function Header({ dark, setDark }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [classType, setClassType] = useState("");
-  const [participants, setParticipants] = useState("");
   const [onlineOffline, setOnlineOffline] = useState("");
+  const [participants, setParticipants] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [isSearched, setIsSearched] = useState(false);
-  
-  const uniqueTypes = [...new Set(classList.map(item => item.type))];
-  const uniquePeople = [...new Set(classList.map(item => item.people))];
-  const uniqueLine = [...new Set(classList.map(item => item.line))];
-  const uniquePrice = [...new Set(classList.map(item => item.price))];
+
+  const uniqueTypes = [...new Set([...classList, ...classListNew].map((item) => item.type))];
+  const uniqueLine = [...new Set([...classList, ...classListNew].map((item) => item.line))];
 
   const handleReset = () => {
     setSearchQuery("");
@@ -34,7 +32,6 @@ export default function Header({ dark, setDark }) {
   };
 
   const userData = useUser();
-  // console.log(userData);
   const userName = userData; // 유저 아이디 추출
 
   const handleLogout = async () => {
@@ -43,25 +40,15 @@ export default function Header({ dark, setDark }) {
     window.location.href = "/";
   };
 
-  const handleSearch = () => {
-    const filtered = classList.filter((item) => {
-      // 검색어로 필터링
-      const isNameMatch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
-      // 각 옵션이 데이터에 존재하고 해당 값과 일치하는 경우에만 해당 값을 필터링 조건으로 사용
-      const isTypeMatch = !classType || item.type === classType;
-      const isPeopleMatch = !participants || item.people === participants;
-      const isLineMatch = !onlineOffline || item.line === onlineOffline;
-      const isPriceMatch = !priceRange || item.price === priceRange;
-  
-      // 모든 조건이 참인 경우에만 필터링되도록 설정
-      return isNameMatch && isTypeMatch && isPeopleMatch && isLineMatch && isPriceMatch;
-    });
+  const handleSearch = (classType, onlineOffline, participants, priceRange, searchQuery) => {
+    // 검색 조건
+    const conditions = [(item) => classType.trim() === "" || item.type === classType, (item) => onlineOffline.trim() === "" || item.line === onlineOffline, (item) => participants.trim() === "" || +item.people.split("~")[1] >= participants, (item) => priceRange.trim() === "" || +item.price.split(",").join("") >= priceRange, (item) => searchQuery.trim() === "" || item.name.includes(searchQuery)];
+
+    // 검색 조건으로 필터링
+    const filtered = [...classList, ...classListNew].filter((item) => conditions.every((condition) => condition(item)));
     setFilteredClasses(filtered);
     setIsSearched(true);
   };
-  
-  
-  
 
   const titVariants = {
     start: { y: "100px" },
@@ -162,60 +149,71 @@ export default function Header({ dark, setDark }) {
               </div>
               <div className="w-full flex flex-wrap justify-center text-center gap-4 py-6">
                 <button className="w-fit">
-                  <select onClick={(e)=>setClassType(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-[29px] cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={classType} onChange={(e) => setClassType(e.target.value)}>
-                  <option value="" disabled className=" bg-white">
-                    분류
-                  </option>
-                  {uniqueTypes.map((type, index) => (
-                    <option key={index} value={type}  className="bg-white">
-                      {type}
+                  <select onClick={(e) => setClassType(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-[29px] cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={classType} onChange={(e) => setClassType(e.target.value)}>
+                    <option value="" disabled className=" bg-white">
+                      분류
                     </option>
-                  ))}
-                    {/* 나머지 옵션들 추가 */}
-                  </select>
-                </button>
-                {/* 세부 검색박스 버튼들 */}
-                <button className="w-fit">
-                  <select onClick={(e)=>setParticipants(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-[29px] cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={participants} onChange={(e) => setParticipants(e.target.value)}>
-                  <option value="" disabled className=" bg-white">
-                    참가 인원
-                  </option>
-                  {uniquePeople.map((peopleRange, index) => (
-                    <option key={index} value={peopleRange}  className="bg-white">
-                      {peopleRange}
-                    </option>
-                  ))}
-                    {/* 나머지 옵션들 추가 */}
+                    {uniqueTypes.map((type, index) => (
+                      <option key={index} value={type} className="bg-white">
+                        {type}
+                      </option>
+                    ))}
                   </select>
                 </button>
                 <button className="w-fit">
-                  <select  onClick={(e)=>setOnlineOffline(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-8 cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={onlineOffline} onChange={(e) => setOnlineOffline(e.target.value)}>
-                  <option value="" disabled className=" bg-white">
-                    온/오프라인
-                  </option>
-                  {uniqueLine.map((line, index) => (
-                    <option key={index} value={line} className="bg-white">
-                      {line}
+                  <select onClick={(e) => setOnlineOffline(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-8 cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={onlineOffline} onChange={(e) => setOnlineOffline(e.target.value)}>
+                    <option value="" disabled className=" bg-white">
+                      온/오프라인
                     </option>
-                  ))}
+                    {uniqueLine.map((line, index) => (
+                      <option key={index} value={line} className="bg-white">
+                        {line}
+                      </option>
+                    ))}
                   </select>
                 </button>
                 <button className="w-fit">
-                  <select  onClick={(e)=>setPriceRange(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={priceRange} onChange={(e) => setPriceRange(e.target.value)}>
-                  <option value="" disabled className=" bg-white">
-                    가격
-                  </option>
-                  {uniquePrice.map((price, index) => (
-                    <option key={index} value={price} className="bg-white">
-                      {price}
+                  <select onClick={(e) => setParticipants(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-[29px] cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={participants} onChange={(e) => setParticipants(e.target.value)}>
+                    <option value="" disabled className=" bg-white">
+                      참가 인원
                     </option>
-                  ))}
-                    {/* 나머지 옵션들 추가 */}
+                    <option value={1} className="bg-white">
+                      1명부터
+                    </option>
+                    <option value={2} className="bg-white">
+                      2명부터
+                    </option>
+                    <option value={3} className="bg-white">
+                      3명부터
+                    </option>
+                    <option value={4} className="bg-white">
+                      4명부터
+                    </option>
+                  </select>
+                </button>
+
+                <button className="w-fit">
+                  <select onClick={(e) => setPriceRange(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={priceRange} onChange={(e) => setPriceRange(e.target.value)}>
+                    <option value="" disabled className=" bg-white">
+                      가격
+                    </option>
+                    <option value={20000} className="bg-white">
+                      20,000~
+                    </option>
+                    <option value={40000} className="bg-white">
+                      40,000~
+                    </option>
+                    <option value={60000} className="bg-white">
+                      60,000~
+                    </option>
+                    <option value={80000} className="bg-white">
+                      80,000~
+                    </option>
                   </select>
                 </button>
               </div>
               <div className="w-full flex justify-center mt-[0px] sm:mt-[15px]">
-                <button className="w-[50%] py-3 bg-mainBlue rounded-full" onClick={handleSearch}>
+                <button className="w-[50%] py-3 bg-mainBlue rounded-full" onClick={() => handleSearch(classType, onlineOffline, participants, priceRange, searchQuery)}>
                   <p className="font-bold text-[26px] text-white">강좌 검색하기</p>
                 </button>
               </div>
@@ -227,7 +225,7 @@ export default function Header({ dark, setDark }) {
       <section className="w-full h-full flex justify-center">
         {isSearched && (
           <div className="w-full h-full flex justify-center">
-            <SearchPage dark={dark} searchQuery={searchQuery} classList={filteredClasses} />
+            <SearchPage dark={dark} searchQuery={searchQuery} filteredClasses={filteredClasses} />
           </div>
         )}
       </section>
