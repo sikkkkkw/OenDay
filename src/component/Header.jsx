@@ -17,6 +17,7 @@ export default function Header({ dark, setDark }) {
   const [priceRange, setPriceRange] = useState("");
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [isSearched, setIsSearched] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   const uniqueTypes = [...new Set([...classList, ...classListNew].map((item) => item.type))];
   const uniqueLine = [...new Set([...classList, ...classListNew].map((item) => item.line))];
@@ -29,6 +30,7 @@ export default function Header({ dark, setDark }) {
     setPriceRange("");
     setFilteredClasses([]);
     setIsSearched(false);
+    setIsEmpty(false);
   };
 
   const userData = useUser();
@@ -46,7 +48,14 @@ export default function Header({ dark, setDark }) {
 
     // 검색 조건으로 필터링
     const filtered = [...classList, ...classListNew].filter((item) => conditions.every((condition) => condition(item)));
+    // 검색 조건을 하나도 지정하지 않았을 때
+    if (conditions.every((condition) => condition({ type: "", line: "", people: "", price: "", name: "" }))) {
+      setIsSearched(true);
+      setIsEmpty(true);
+      return;
+    }
     setFilteredClasses(filtered);
+    setIsEmpty(false);
     setIsSearched(true);
   };
 
@@ -225,7 +234,7 @@ export default function Header({ dark, setDark }) {
       <section className="w-full h-full flex justify-center">
         {isSearched && (
           <div className="w-full h-full flex justify-center">
-            <SearchPage dark={dark} searchQuery={searchQuery} filteredClasses={filteredClasses} />
+            <SearchPage dark={dark} searchQuery={searchQuery} filteredClasses={filteredClasses} isEmpty={isEmpty} />
           </div>
         )}
       </section>
