@@ -40,7 +40,14 @@ export default function Header({ dark, setDark }) {
 
   const handleSearch = () => {
     const filtered = classList.filter((item) => {
-      return item.name.includes(searchQuery) && item.type.includes(searchQuery);
+      const nameIncludesQuery = item.name.toLowerCase().includes(searchQuery.toLowerCase());
+      const typeIncludesQuery = item.type.toLowerCase().includes(searchQuery.toLowerCase());
+      return nameIncludesQuery || typeIncludesQuery;
+    }).filter((item) => {
+      return (!classType || item.type === classType) &&
+        (!participants || item.people.includes(participants)) &&
+        (!onlineOffline || item.line === onlineOffline) &&
+        (!priceRange || parseInt(item.price) >= parseInt(priceRange));
     });
     setFilteredClasses(filtered);
     setIsSearched(true);
