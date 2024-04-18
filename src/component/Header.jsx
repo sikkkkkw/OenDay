@@ -48,12 +48,15 @@ export default function Header({ dark, setDark }) {
 
     // 검색 조건으로 필터링
     const filtered = [...classList, ...classListNew].filter((item) => conditions.every((condition) => condition(item)));
+
     // 검색 조건을 하나도 지정하지 않았을 때
     if (conditions.every((condition) => condition({ type: "", line: "", people: "", price: "", name: "" }))) {
       setIsSearched(true);
       setIsEmpty(true);
       return;
     }
+
+    // 검색 결과 반영
     setFilteredClasses(filtered);
     setIsEmpty(false);
     setIsSearched(true);

@@ -100,6 +100,7 @@ select {
 }
 
 .swiper-initialized.swiper-horizontal {
+  width: 100%;
   max-width: 1600px;
   min-height: 440px;
 }
