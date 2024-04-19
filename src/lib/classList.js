@@ -18,6 +18,8 @@ import petWalnut from "../img/petWalnut.jpg";
 import active5 from "../img/mother.jpg";
 import active6 from "../img/ring.jpg";
 import art3 from "../img/pastel.jpg";
+import drinkBread from "../img/drinkBread.jpg";
+import susemi from "../img/susemi.jpg";
 
 export const classList = [
   {
@@ -346,5 +348,37 @@ export const classListNew = [
     desc3: "힐링이라는 모토로 석고,레진,자개공예 등 다양한 공예자격증과정을 수강하실 수 있습니다. 한국직업능력개발원 민간자격증 등록교육기관으로 다수의 수강생 배출로 초보자들도 쉽게 배우실수 있게 지도하고 있습니다. 쉽게 편안하게 배우시고 싶으시면 연락주세요!",
     sns: "https://www.instagram.com/",
     imageUrl: active5,
+  },
+  {
+    id: 21,
+    type: "요리",
+    line: "오프라인",
+    people: "2~6",
+    name: "쉽고 빠른 술빵 만들기",
+    price: "48,000",
+    address: "대구광역시 중구 공평로 88",
+    park: "가능",
+    time: "1",
+    desc: "요즘 인기있는 술빵 클래스입니다. 예전에 먹던 친숙한 술빵이 선물용으로 쓰기 좋은 고급스러운 디저트로 재탄생했어요. 아이들 간식, 집안 어르신들 선물, 새로운 창업 아이템으로도 적합합니다.",
+    desc2: "<li>쉽게 빵을 만들고 싶은 분</li><li>베이킹을 좋아하시는 분</li><li>어버이날 선물을 직접 만들고 싶은 분</li><li>창업 아이템을 찾는 분</li>",
+    desc3: "유럽 케이크, 일본 제과, 한국 떡 등 각국의 디저트를 배울 수 있는 다이닝을 운영합니다.",
+    sns: "https://www.instagram.com/",
+    imageUrl: drinkBread,
+  },
+  {
+    id: 22,
+    type: "체험",
+    line: "오프라인",
+    people: "4~7",
+    name: "코바늘 기초/호빵 수세미 뜨기",
+    price: "15,000",
+    address: "대구광역시 중구 공평로 88",
+    park: "가능",
+    time: "1",
+    desc: "코바늘 왕초보 분들을 위한 수업입니다. 이 수업을 듣고나면 유튜브 등을 통해 다른 내용을 독학 하실 수 있게 될 거예요. 코바늘 코잡기, 기본 뜨기, 기호 및 도안 보는 방법까지 모두 배우실 수 있어요.<br />초등학생도 쉽게 배울 수 있는 코바늘 뜨기. 수세미 외에도 컵받침, 머리 곱창 등 원하는 소품을 만들 수 있습니다. ",
+    desc2: "<li>수세미를 취미로 뜨고 싶은 분</li><li>집에서 혼자 도안 보며 하기 힘든 분</li><li>수다 떨며 뜨개질 하고 싶은 분</li><li>초등학교 수업 대비용으로 연습하고 싶은 학생</li>",
+    desc3: "핸드메이드 제품을 좋아해요. 다양한 작가님들의 작품을 소개하고 판매하고 있습니다.",
+    sns: "https://www.instagram.com/",
+    imageUrl: susemi,
   },
 ];
