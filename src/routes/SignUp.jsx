@@ -149,7 +149,7 @@ export default function SignUp() {
               />
               {pass2View ? <FaEye onClick={onEye2Click} className="absolute top-[10px] right-[18px] cursor-pointer" size="26px" color="#ccc" /> : <FaEyeSlash onClick={onEye2Click} className="absolute top-[8px] right-4 cursor-pointer" size="30px" color="#ccc" />}
             </div>
-            <div className="text-center">
+            <div className="text-center cursor-pointer">
               <input type="checkbox" id="agree" onChange={handleChecked} />
               <label htmlFor="agree" className={`${isDark && "text-white"}`}>
                 &nbsp;&nbsp;개인정보 제공 및 카카오톡을 통한 알림톡 전송에 동의합니다.
