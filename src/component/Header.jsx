@@ -205,7 +205,7 @@ export default function Header({ dark, setDark }) {
                 </button>
 
                 <button className="w-fit">
-                  <select onClick={(e) => setPriceRange(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={priceRange} onChange={(e) => setPriceRange(e.target.value)}>
+                  <select onClick={(e) => setPriceRange(e.target.value)} className="border-2 border-gray-400 rounded-2xl outline-none p-2 pr-[29px]  cursor-pointer" style={{ background: `url(${angleDown}) no-repeat 90% 50%/15px` }} value={priceRange} onChange={(e) => setPriceRange(e.target.value)}>
                     <option value="" disabled className=" bg-white">
                       가격
                     </option>

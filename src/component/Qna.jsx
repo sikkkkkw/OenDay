@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
 import { sectVariants } from "../lib/variants";
 
@@ -7,15 +7,15 @@ const Detail = ({ summ, txt, border, dark }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleQna = () => setIsOpen(!isOpen);
   return (
-    <div onClick={toggleQna} className="">
-      <button className={`${border} px-5 py-[16px] border-[#ccc] w-full text-left flex justify-between items-center text-[20px] font-semibold outline-none`}>
+    <div className="">
+      <button onClick={toggleQna} className={`${border} px-5 py-[16px] border-[#ccc] w-full text-left flex justify-between items-center text-[20px] font-semibold outline-none`}>
         <p>{summ}</p>
-        <IoIosArrowDown />
+        {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
       </button>
       <AnimatePresence>
         {isOpen && (
           <motion.div className={`overflow-hidden text-[18px] ${dark ? "bg-[#212121]" : "bg-[#f7f7f7]"}`} initial={{ height: 0, padding: "0px 20px" }} animate={{ height: "60px", padding: "16px 20px" }} exit={{ height: 0, padding: "0px 20px" }} transition={{ duration: 0.2 }}>
-            {txt}
+            {txt}            
           </motion.div>
         )}
       </AnimatePresence>
