@@ -48,7 +48,7 @@ export default function Modal({ modalRef, onClose, content, dark }) {
       const day = newData.dateDay;
       const people = newData.number;
       const tel = userName?.user?.phone;
-      const LINK = ["one-day-git-master-jaesiks-projects.vercel.app"];
+      const LINK = "one-day-git-master-jaesiks-projects.vercel.app";
       const pfid = process.env.PFID;
       const templateId = process.env.TEMPLATEID;
 
