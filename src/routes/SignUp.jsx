@@ -45,13 +45,13 @@ export default function SignUp() {
           message: data.message,
         });
       }
-      if (data?.result === "iderror") {
+      else if (data?.result === "iderror") {
         setError("username", {
           message: data.message,
         });
         
       }
-      if(data?.result === "emailerror"){
+      else if(data?.result === "emailerror"){
         setError("email", {
           message: data.message,
         });
