@@ -1,9 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useTheme } from "../ThemeContext.jsx";
 import { Link } from "react-router-dom";
-// import clock from "../img/clock.png";
-// import phone from "../img/megaphone.png";
-// import fire from "../img/celeb.png";
 import logo from "../img/logo.svg";
 import useUser from "../component/useUser";
 import MyCard from "../component/MyCard";
@@ -14,7 +11,6 @@ export default function Mypage() {
   const { isDark } = useTheme();
   const userData = useUser();
   const userName = userData;
-  // console.log(userName);
 
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
@@ -33,8 +29,6 @@ export default function Mypage() {
     setSelectedImage("");
     e.stopPropagation();
   };
-
-  const myCards = [...classList, ...classListNew];
 
   // // 세션 스토리지에서 데이터 가져오기
   const storedData = JSON.parse(sessionStorage.getItem("DataArray"));
