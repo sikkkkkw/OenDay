@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import logo from "../img/logo.svg";
 import useUser from "../component/useUser";
 import MyCard from "../component/MyCard";
-import { classList, classListNew } from "../lib/classList.js";
 import Modal from "../lib/modal.js";
 
 export default function Mypage() {
