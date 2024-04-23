@@ -37,10 +37,16 @@ export default function SignUp() {
       }
     },
     onSettled: (data) => {
-      if (data?.result === false) {
+      if (data?.result === "iderror") {
         setError("username", {
           message: data.message,
         });
+        
+      }if(data?.result === "emailerror"){
+        setError("email", {
+          message: data.message,
+        });
+        
       }
     },
   });
