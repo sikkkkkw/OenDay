@@ -29,7 +29,7 @@ export default function Mypage() {
     e.stopPropagation();
   };
 
-  // // 세션 스토리지에서 데이터 가져오기
+  // 세션 스토리지에서 데이터 가져오기
   const storedData = JSON.parse(sessionStorage.getItem("DataArray"));
   return (
     <div className="w-full flex flex-col items-center p-4 gap-y-7">
