@@ -1,4 +1,4 @@
-# 동성로 관광 안내 사이트
+# 대구 원데이 클래스 홍보 사이트
 
 ### 팀원
 https://github.com/sikkkkkw
